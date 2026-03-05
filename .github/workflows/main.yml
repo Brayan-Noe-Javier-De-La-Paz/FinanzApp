@@ -5,8 +5,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          
       - run: flutter pub get
+      
+      # --- PASO NUEVO: Creación del archivo de Firebase ---
+      - name: Crear archivo firebase_options.dart
+        run: |
+          cat <<EOF > lib/firebase_options.dart
+          ${{ secrets.FIREBASE_OPTIONS }}
+          EOF
+      # ----------------------------------------------------
+      
       - run: flutter build apk --debug

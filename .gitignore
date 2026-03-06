@@ -48,4 +48,3 @@ app.*.map.json
 # Archivos de configuración de Firebase
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
-lib/firebase_options.dart

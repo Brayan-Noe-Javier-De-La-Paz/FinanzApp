@@ -12,8 +12,16 @@ jobs:
           
       - run: flutter pub get
       
-      # --- INYECTAR VARIABLES DE ENTORNO ---
+      # Tu paso anterior que ya funcionó
       - name: Crear archivo .env
         run: echo "${{ secrets.ENV_FILE }}" > .env
+
+      # --- PASO NUEVO: Inyectar google-services.json ---
+      - name: Crear google-services.json
+        run: |
+          cat <<EOF > android/app/google-services.json
+          ${{ secrets.GOOGLE_SERVICES_JSON }}
+          EOF
+      # -------------------------------------------------
       
       - run: flutter build apk --debug
